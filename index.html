@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REInvestorGuide Financing Match Mockup</title>
+    <meta
+      name="description"
+      content="A high-conversion investor financing match form mockup for REInvestorGuide."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="REInvestorGuide home">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span class="brand-copy">
+          <span class="brand-name">REInvestorGuide</span>
+          <span class="brand-line">Investor financing match</span>
+        </span>
+      </a>
+      <div class="header-trust" aria-label="Trust signals">
+        <span>No SSN required</span>
+        <span>Won't affect credit</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero-copy" aria-labelledby="page-title">
+        <p class="eyebrow">Investor loan matching</p>
+        <h1 id="page-title">Find financing that fits the deal.</h1>
+        <p class="lede">
+          Answer a few questions. Get your best-matched lender.
+        </p>
+
+        <div class="confidence-strip" aria-label="Form benefits">
+          <div>
+            <span class="mini-icon clock-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+            </span>
+            <strong>About 1 minute</strong>
+          </div>
+          <div>
+            <span class="mini-icon shield-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"></path>
+                <path d="M9 12l2 2 4-5"></path>
+              </svg>
+            </span>
+            <strong>Estimate is fine</strong>
+          </div>
+          <div>
+            <span class="mini-icon lender-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v3"></path>
+                <path d="M12 19v3"></path>
+                <path d="M2 12h3"></path>
+                <path d="M19 12h3"></path>
+              </svg>
+            </span>
+            <strong>Best-matched lender</strong>
+          </div>
+        </div>
+
+        <div class="deal-preview" aria-hidden="true">
+          <div class="preview-header">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preview-row">
+            <span>Deal</span>
+            <strong>Rental purchase</strong>
+          </div>
+          <div class="preview-row">
+            <span>Property</span>
+            <strong>2-4 units</strong>
+          </div>
+          <div class="preview-row accent-row">
+            <span>Best match</span>
+            <strong>Ready</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-panel" aria-label="Investor financing match form">
+        <div class="stage-progress" aria-label="Form progress">
+          <div class="stage" data-stage="deal">
+            <span></span>
+            <strong>Deal</strong>
+          </div>
+          <div class="stage" data-stage="property">
+            <span></span>
+            <strong>Property</strong>
+          </div>
+          <div class="stage" data-stage="numbers">
+            <span></span>
+            <strong>Numbers</strong>
+          </div>
+          <div class="stage" data-stage="you">
+            <span></span>
+            <strong>You</strong>
+          </div>
+        </div>
+
+        <div id="formApp" class="form-app" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
