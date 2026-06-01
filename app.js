@@ -63,7 +63,7 @@ const steps = [
     id: "realtorMatch",
     stage: "deal",
     stageLabel: "Deal",
-    title: "Want an investor-friendly Realtor?",
+    title: "Want an investor-friendly real estate agent?",
     helper: "Optional.",
     answerKey: "realtorMatch",
     condition: (answers) => answers.deal === "Purchase" && answers.hasRealtor === "No",
@@ -442,6 +442,9 @@ function renderMatchingScreen(nextIndex) {
 }
 
 function renderUnlockStep(step) {
+  const agentConsentCopy = wantsRealtorMatch()
+    ? " I also agree to be contacted by a BiggerPockets real estate agent about this purchase."
+    : "";
   const summaryHighlights = summaryItems()
     .filter((item) => ["Deal", "Property", "Loan need", "Credit", "ZIP"].includes(item.label))
     .map(
@@ -500,7 +503,7 @@ function renderUnlockStep(step) {
             <label class="consent">
               <input id="consent" name="consent" type="checkbox" ${state.contact.consent ? "checked" : ""}>
             <span>
-              I agree to be contacted by REInvestorGuide and lending partners about this request.
+              I agree to be contacted by REInvestorGuide and my matched lender about this request.${agentConsentCopy}
               Message and data rates may apply.
             </span>
             </label>
@@ -511,7 +514,7 @@ function renderUnlockStep(step) {
             <div class="contact-button-row">
               <button class="btn btn-secondary" type="button" id="unlockBack">Back</button>
               <button class="btn btn-primary" type="submit" form="contactForm">
-                Send My Lender Match
+                Send My Info & Show Match
               </button>
             </div>
           </div>
@@ -750,7 +753,7 @@ function renderSuccess() {
     ? state.affiliateMatches
     : selectAffiliateMatches(parseAffiliateCsv(FALLBACK_AFFILIATE_CSV), state.answers);
   const responseCopy = lender
-    ? "During business hours Monday-Friday, your matched lender will reach out within 1 hour. After hours or on the weekend, they will follow up the next business day."
+    ? `Your info has already been sent to ${lender.name}. During business hours Monday-Friday, their team will reach out within 1 hour. After hours or on the weekend, expect them the next business day.`
     : "We're still working on finding the right lender for this deal. We'll reach out as soon as we're able to find a strong match.";
 
   app.innerHTML = `
@@ -760,15 +763,16 @@ function renderSuccess() {
       <p>
         ${
           lender
-            ? "Your request was received. Here is the lender match for this deal."
+            ? `Your request was received and sent to ${escapeHtml(lender.name)}. They have your info now.`
             : "Your request was received. We're reviewing the deal now."
         }
       </p>
       ${lender ? lenderResultCard(lender, benefits, websiteHref, phoneHref) : noMatchResultCard()}
       <div class="response-window">
         <strong>What happens next</strong>
-        <span>${responseCopy}</span>
+        <span>${escapeHtml(responseCopy)}</span>
       </div>
+      ${wantsRealtorMatch() ? realtorFollowupCard() : ""}
       ${
         affiliateMatches.length
           ? `<button class="btn btn-primary affiliate-trigger" type="button" id="affiliateMatchesButton">We have more matches for you</button>`
@@ -805,11 +809,28 @@ function lenderResultCard(lender, benefits, websiteHref, phoneHref) {
         <ul>
           ${benefits.map((benefit) => `<li>${escapeHtml(benefit)}</li>`).join("")}
         </ul>
+        <div class="lender-transfer-note">
+          <strong>Intro sent</strong>
+          <span>${escapeHtml(lender.name)} already has your details. No need to re-submit on their site unless they ask.</span>
+        </div>
         <div class="lender-actions">
-          <a class="btn btn-primary" href="${escapeAttr(websiteHref)}" target="_blank" rel="noopener">Visit Website</a>
+          <a class="btn btn-primary" href="${escapeAttr(websiteHref)}" target="_blank" rel="noopener">View Lender Site</a>
           <a class="btn btn-secondary" href="${escapeAttr(phoneHref)}">${escapeHtml(lender.phone)}</a>
         </div>
       </div>
+    </section>
+  `;
+}
+
+function realtorFollowupCard() {
+  return `
+    <section class="realtor-followup" aria-label="Real estate agent follow-up">
+      <span class="result-kicker">Agent match requested</span>
+      <h3>BiggerPockets agent follow-up</h3>
+      <p>
+        Since you asked for agent help, an investor-friendly real estate agent through BiggerPockets
+        will reach out separately about the purchase.
+      </p>
     </section>
   `;
 }
@@ -927,6 +948,10 @@ function affiliateCard(affiliate) {
       </div>
     </article>
   `;
+}
+
+function wantsRealtorMatch() {
+  return state.answers.deal === "Purchase" && normalizeMatchValue(state.answers.realtorMatch).startsWith("yes");
 }
 
 function summaryItems() {
