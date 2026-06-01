@@ -857,25 +857,6 @@ h1 {
   text-align: center;
 }
 
-.success-badge {
-  display: grid;
-  width: 64px;
-  height: 64px;
-  place-items: center;
-  margin: 0 auto 18px;
-  border-radius: 50%;
-  background: var(--surface-strong);
-}
-
-.success-badge::after {
-  content: "";
-  width: 18px;
-  height: 30px;
-  border-right: 4px solid var(--green);
-  border-bottom: 4px solid var(--green);
-  transform: rotate(45deg);
-}
-
 .success-screen h2 {
   margin: 0;
   font-size: 2rem;
@@ -900,6 +881,12 @@ h1 {
   padding: 22px;
   text-align: left;
   box-shadow: 0 12px 34px rgba(23, 36, 58, 0.08);
+}
+
+.lender-result-aside {
+  display: grid;
+  align-content: start;
+  gap: 12px;
 }
 
 .no-match-result {
@@ -1001,11 +988,11 @@ h1 {
 
 .lender-transfer-note {
   display: grid;
-  gap: 3px;
+  gap: 5px;
   border: 1px solid rgba(36, 118, 91, 0.22);
   border-radius: var(--radius);
   background: var(--surface-strong);
-  padding: 11px 12px;
+  padding: 12px;
 }
 
 .lender-transfer-note strong {
@@ -1021,32 +1008,24 @@ h1 {
 
 .lender-actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px 14px;
   margin-top: 4px;
 }
 
-.response-window {
-  display: grid;
-  gap: 6px;
-  width: min(100%, 640px);
-  margin: 14px auto 0;
-  border: 1px solid rgba(36, 118, 91, 0.24);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
-  padding: 15px 18px;
-  text-align: left;
-}
-
-.response-window strong {
+.lender-site-link {
   color: var(--green-dark);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 850;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.response-window span {
+.lender-phone {
   color: var(--muted);
   font-size: 0.92rem;
-  line-height: 1.45;
+  font-weight: 750;
 }
 
 .realtor-followup {

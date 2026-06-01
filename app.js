@@ -747,18 +747,13 @@ function normalizeApiAffiliate(affiliate) {
 function renderSuccess() {
   const lender = state.lenderMatch || selectBestLender(state.lenders || parseLenderCsv(FALLBACK_LENDER_CSV), state.answers);
   const websiteHref = lender ? normalizeWebsite(lender.website) : "#";
-  const phoneHref = lender ? `tel:${lender.phone.replace(/\D/g, "")}` : "#";
   const benefits = lender ? lender.benefits.slice(0, 3) : [];
   const affiliateMatches = state.affiliateMatches && state.affiliateMatches.length
     ? state.affiliateMatches
     : selectAffiliateMatches(parseAffiliateCsv(FALLBACK_AFFILIATE_CSV), state.answers);
-  const responseCopy = lender
-    ? `Your info has already been sent to ${lender.name}. During business hours Monday-Friday, their team will reach out within 1 hour. After hours or on the weekend, expect them the next business day.`
-    : "We're still working on finding the right lender for this deal. We'll reach out as soon as we're able to find a strong match.";
 
   app.innerHTML = `
     <div class="success-screen">
-      <span class="success-badge" aria-hidden="true"></span>
       <h2>Thanks, ${escapeHtml(state.contact.firstName)}.</h2>
       <p>
         ${
@@ -767,11 +762,7 @@ function renderSuccess() {
             : "Your request was received. We're reviewing the deal now."
         }
       </p>
-      ${lender ? lenderResultCard(lender, benefits, websiteHref, phoneHref) : noMatchResultCard()}
-      <div class="response-window">
-        <strong>What happens next</strong>
-        <span>${escapeHtml(responseCopy)}</span>
-      </div>
+      ${lender ? lenderResultCard(lender, benefits, websiteHref) : noMatchResultCard()}
       ${wantsRealtorMatch() ? realtorFollowupCard() : ""}
       ${
         affiliateMatches.length
@@ -797,11 +788,20 @@ function noMatchResultCard() {
   `;
 }
 
-function lenderResultCard(lender, benefits, websiteHref, phoneHref) {
+function lenderResultCard(lender, benefits, websiteHref) {
   return `
     <section class="lender-result" aria-label="Matched lender">
-      <div class="lender-logo-wrap">
-        ${lender.logo ? `<img src="${escapeAttr(lender.logo)}" alt="${escapeAttr(lender.name)} logo">` : `<span>${escapeHtml(lender.name.charAt(0))}</span>`}
+      <div class="lender-result-aside">
+        <div class="lender-logo-wrap">
+          ${lender.logo ? `<img src="${escapeAttr(lender.logo)}" alt="${escapeAttr(lender.name)} logo">` : `<span>${escapeHtml(lender.name.charAt(0))}</span>`}
+        </div>
+        <div class="lender-transfer-note">
+          <strong>Intro Sent</strong>
+          <span>
+            We have sent your loan information and contact information to ${escapeHtml(lender.name)}.
+            Expect a text message or call within the hour.
+          </span>
+        </div>
       </div>
       <div class="lender-result-body">
         <span class="result-kicker">Best-matched lender</span>
@@ -809,13 +809,9 @@ function lenderResultCard(lender, benefits, websiteHref, phoneHref) {
         <ul>
           ${benefits.map((benefit) => `<li>${escapeHtml(benefit)}</li>`).join("")}
         </ul>
-        <div class="lender-transfer-note">
-          <strong>Intro sent</strong>
-          <span>${escapeHtml(lender.name)} already has your details. No need to re-submit on their site unless they ask.</span>
-        </div>
         <div class="lender-actions">
-          <a class="btn btn-primary" href="${escapeAttr(websiteHref)}" target="_blank" rel="noopener">View Lender Site</a>
-          <a class="btn btn-secondary" href="${escapeAttr(phoneHref)}">${escapeHtml(lender.phone)}</a>
+          <a class="lender-site-link" href="${escapeAttr(websiteHref)}" target="_blank" rel="noopener">View Lender Site</a>
+          <span class="lender-phone">${escapeHtml(lender.phone)}</span>
         </div>
       </div>
     </section>
