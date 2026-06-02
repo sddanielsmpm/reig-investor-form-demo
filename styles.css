@@ -168,60 +168,6 @@ h1 {
   color: var(--gold);
 }
 
-.deal-preview {
-  max-width: 430px;
-  margin-top: 26px;
-  border: 1px solid rgba(23, 36, 58, 0.14);
-  border-radius: var(--radius);
-  background: #17243a;
-  box-shadow: var(--shadow);
-  color: #fff;
-  overflow: hidden;
-}
-
-.preview-header {
-  display: flex;
-  gap: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 14px;
-}
-
-.preview-header span {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.preview-header span:nth-child(2) {
-  background: var(--green);
-}
-
-.preview-header span:nth-child(3) {
-  background: var(--plum);
-}
-
-.preview-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 16px 18px;
-}
-
-.preview-row span {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.preview-row strong {
-  text-align: right;
-}
-
-.accent-row {
-  border-bottom: 0;
-  background: rgba(36, 118, 91, 0.24);
-}
-
 .form-panel {
   border: 1px solid rgba(23, 36, 58, 0.12);
   border-radius: var(--radius);
@@ -1261,9 +1207,6 @@ body.modal-open {
     font-size: 3rem;
   }
 
-  .deal-preview {
-    display: none;
-  }
 }
 
 @media (max-width: 720px) {
