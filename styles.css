@@ -49,48 +49,10 @@ button {
 .site-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-end;
   max-width: 1180px;
   margin: 0 auto;
   padding: 22px 24px 12px;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.brand-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 2px solid var(--green);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--green-dark);
-  font-size: 1.35rem;
-  font-weight: 800;
-}
-
-.brand-copy {
-  display: grid;
-  gap: 2px;
-}
-
-.brand-name {
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-.brand-line {
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 700;
 }
 
 .header-trust {
@@ -1307,8 +1269,6 @@ body.modal-open {
 @media (max-width: 720px) {
   .site-header {
     align-items: flex-start;
-    flex-direction: column;
-    gap: 14px;
     padding: 18px 16px 8px;
   }
 
@@ -1390,10 +1350,6 @@ body.modal-open {
 }
 
 @media (max-width: 420px) {
-  .brand-name {
-    font-size: 0.94rem;
-  }
-
   .header-trust span {
     font-size: 0.78rem;
   }
